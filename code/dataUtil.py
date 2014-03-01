@@ -1,6 +1,5 @@
-# Fit RandomForest Classifer fo tagMe
+# Data Utility Class
 
-from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import numpy as np
 from collections import defaultdict
@@ -41,4 +40,4 @@ def getData(trainFile,trainLabelsFile,validationFile,validationLabelsFile):
 	trainLabels.close()
 	validationData.close()
 	validationLabels.close()
-	return df
+	return [df,data]
