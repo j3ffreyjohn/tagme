@@ -11,5 +11,11 @@ Because I don't want to visually inspect perfomance on the validation set later 
 
 Step 1: Use Given Features
 --------------------------
-The first method is make use of the best out-of-box classifier I know of, Random Forests, using the <a href="http://blog.yhathq.com/posts/random-forests-in-python.html">RandomForestClassifier</a> in sklearn. 
- 
+The first method is make use of the best out-of-box classifier I know of, Random Forests, using the <a href="http://blog.yhathq.com/posts/random-forests-in-python.html">RandomForestClassifier</a> in sklearn. With the provided features, with 10 or 100 trees, the classification accuracy hovered around 20% for 5-classes. Clearly, we need more discriminative features here. The confusion matrix obtained:
+|  actual/preds           | Buildings           | Cars  | Faces   | Flowers   | Shoes  |
+| ------------- |:---:|:---:|:---:|:---:|:---:| 
+| Buildings      | 23 | 9 | 41 | 12 | 15 |
+| Cars     | 75  | 9 | 14 | 0 | 2 |
+| Faces | 2 | 15 | 3 | 74 | 6 |
+| Flowers | 7 | 70 | 7 | 7 | 9 |
+| Shoes   | 2 | 9 | 3 | 19 | 67 |

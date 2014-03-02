@@ -24,7 +24,7 @@ train, test = df[df['is_train']==1], df[df['is_train']==0]
 
 # Fit RF Model and obtain predictions
 features = df.columns[:-2]
-clf = RandomForestClassifier(n_jobs=2)
+clf = RandomForestClassifier(n_estimators=100,n_jobs=2)
 y, _ = pd.factorize(train['class'])
 clf.fit(train[features],y)
 preds = target_names[clf.predict(test[features])]
