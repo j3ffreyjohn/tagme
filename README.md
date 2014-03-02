@@ -15,8 +15,8 @@ The first method is make use of the best out-of-box classifier I know of, Random
 
 actual/preds | Buildings | Cars | Faces | Flowers | Shoes
 ------------- |---|---|---|---|---
-Buildings | 23 | 9 | 41 | 12 | 15
-Cars | 75  | 9 | 14 | 0 | 2
-Faces | 2 | 15 | 3 | 74 | 6
-Flowers | 7 | 70 | 7 | 7 | 9
-Shoes | 2 | 9 | 3 | 19 | 67
+Buildings | *23*| 9 | 41 | 12 | 15
+Cars | 75  |*9* | 14 | 0 | 2
+Faces | 2 | 15 | *3* | 74 | 6
+Flowers | 7 | 70 | 7 | *7* | 9
+Shoes | 2 | 9 | 3 | 19 | *67*
