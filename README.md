@@ -21,7 +21,9 @@ Faces | 2 | 15 | **3** | 74 | 6
 Flowers | 7 | 70 | 7 | **7** | 9
 Shoes | 2 | 9 | 3 | 19 | **67**
 
-Update : The contest team reports that that obtained 70% accuracy with these features using a multi-class SVM. Either there's a bug in my RF code or SVM is doing way better. Will need to implement muti class SVM also for sanity check. 
+``Update`` : The contest team reports that that obtained 70% accuracy with these features using a multi-class SVM. Either there's a bug in my RF code or SVM is doing way better. Will need to implement muti class SVM also for sanity check.
+
+``Update`` : Multi Class SVM gives 64% accuracy on the noisy validation set.  
 
 Step 2 : Feature Extraction
 ---------------------------
