@@ -20,3 +20,9 @@ Cars | 75  |**9** | 14 | 0 | 2
 Faces | 2 | 15 | **3** | 74 | 6
 Flowers | 7 | 70 | 7 | **7** | 9
 Shoes | 2 | 9 | 3 | 19 | **67**
+
+Update : The contest team reports that that obtained 70% accuracy with these features using a multi-class SVM. Either there's a bug in my RF code or SVM is doing way better. Will need to implement muti class SVM also for sanity check. 
+
+Step 2 : Feature Extraction
+---------------------------
+Most sparse coding/sparse filtering algorithms work on image patches, so we first obtain image patches from natural images. As a first step, we extract Scale Invariant Feature Transform (SIFT) and Speeded-Up Robust Features(SIRF) from the images using the opencv python interface and write the descriptors to a file to see how that improves the performance of the current vanilla RF classifier. 
