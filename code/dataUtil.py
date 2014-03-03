@@ -4,6 +4,30 @@ import pandas as pd
 import numpy as np
 from collections import defaultdict
 
+# Compute classification accuracy of predictions
+def getAcc(predictionsFile,truthFile):
+	p = open(predictionsFile,'r')
+	t = open(truthFile, 'r')
+	preds = defaultdict()
+	truth = defaultdict()
+	total = 0
+	correct = 0
+	for el in p:
+		elSplit = el.split(' ')
+		preds[elSplit[0]] = elSplit[1][0]
+	for el in t:
+		elSplit = el.split(' ')
+		truth[elSplit[0]] = elSplit[1][0]
+	for k,v in preds.iteritems():
+		if preds[k] == truth[k]:
+			correct +=1
+		total += 1
+	p.close()
+	t.close()
+	return (correct*100.0)/total
+			
+
+
 # Return class name for label
 def getClass(label):
 	dict = {'1': 'Buildings', '2': 'Cars', '3': 'Faces', '4': 'Flowers', '5':'Shoes'}
@@ -43,6 +67,7 @@ def getData(trainFile,trainLabelsFile,validationFile,validationLabelsFile):
 	data = dataD.values()
 	dataNP = np.concatenate([[b[1]] for b in data])
 	df = pd.DataFrame(dataNP)
+	df['fileName'] = [b[0] for b in data]
 	df['is_train'] = [b[2] for b in data]
 	target = np.array([int(b[3])-1 for b in data])
 	target_names = np.array(['Buildings','Cars','Faces','Flowers','Shoes'])

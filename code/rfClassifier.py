@@ -21,9 +21,10 @@ testData = [el for el in data if el[2]==0]
 
 # Obtain train and test data
 train, test = df[df['is_train']==1], df[df['is_train']==0]
+testFiles = list(test['fileName'])
 
 # Fit RF Model and obtain predictions
-features = df.columns[:-2]
+features = df.columns[:-3]
 clf = RandomForestClassifier(n_estimators=100,n_jobs=2)
 y, _ = pd.factorize(train['class'])
 clf.fit(train[features],y)
@@ -32,17 +33,11 @@ pd.crosstab(test['class'], preds, rownames=['actual'], colnames=['preds'])
 
 # Output predictions
 predOut = open(predictionsFile,'w')
-for i in range(len(test)):
-	predOut.write(testData[i][0]+' '+DU.getLabel(preds[i])+'\n')
+for i in range(len(testFiles)):
+	predOut.write(testFiles[i]+' '+DU.getLabel(preds[i])+'\n')
 predOut.close()
 
 # Compute Classification Accuracy
-total=0
-correct = 0
-for i in range(len(preds)):
-	if DU.getLabel(preds[i])==testData[i][3]:
-		correct +=1
-	total +=1
+accuracy = DU.getAcc(predictionsFile,validationLabelsFile)
+print 'Classification Accuracy : ', accuracy
 
-print 'Classification Accuracy : ', (correct*100.0)/total
-	
