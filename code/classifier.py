@@ -10,8 +10,8 @@ trainFile = '../data/Train/feature_vectors.txt'
 trainLabelsFile = '../data/Train/labels.txt'
 validationFile = '../data/Validation/feature_vectors.txt'
 validationLabelsFile = '../data/Validation/trueLabels.txt'
-predictionsFile_RF = '../data/preds_RF.txt'
-predictionsFile_SVM = '../data/preds_SVM.txt'
+predictionsFile_RF = '../data/RF/labels.txt'
+predictionsFile_SVM = '../data/SVM/labels.txt'
 
 # Obtain data frame
 dataFrames = DU.getData(trainFile,trainLabelsFile,validationFile,validationLabelsFile)

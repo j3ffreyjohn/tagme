@@ -11,19 +11,8 @@ Because I don't want to visually inspect perfomance on the validation set later 
 
 Step 1: Use Given Features
 --------------------------
-The first method is make use of the best out-of-box classifier I know of, Random Forests, using the <a href="http://blog.yhathq.com/posts/random-forests-in-python.html">RandomForestClassifier</a> in sklearn. With the provided features, with 10 or 100 trees, the classification accuracy hovered around 20% for 5-classes. Clearly, we need more discriminative features here. The confusion matrix obtained:
+I wanted to use a Random Forest, but it performed very poorly - at least with the provided features. I put the available features through a multi class SVM ( validation set of 1000 images) bumping up the accuracy to 60%. A note about the features: For each image, the features are just the eigen values of the matrix when considering the image in gray scale.
 
-actual/preds | Buildings | Cars | Faces | Flowers | Shoes
-------------- |---|---|---|---|---
-Buildings | **23** | 9 | 41 | 12 | 15
-Cars | 75  |**9** | 14 | 0 | 2
-Faces | 2 | 15 | **3** | 74 | 6
-Flowers | 7 | 70 | 7 | **7** | 9
-Shoes | 2 | 9 | 3 | 19 | **67**
-
-``Update`` : The contest team reports that that obtained 70% accuracy with these features using a multi-class SVM. Either there's a bug in my RF code or SVM is doing way better. Will need to implement muti class SVM also for sanity check.
-
-``Update`` : Multi Class SVM gives 64% accuracy on the noisy validation set.  
 
 Step 2 : Feature Extraction
 ---------------------------
