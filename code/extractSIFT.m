@@ -15,6 +15,7 @@ numImages = size(imgList,1);    % get num images
 % Sift Parameters
 binSize = 20;
 magnif = 3;
+stepSize = 2;
 
 c = containers.Map;     % SIFT Dictionary
 tic
@@ -24,7 +25,7 @@ for i=3:numImages,
     I = imread(sprintf('%s/%s',imgDir,imgList(i).name));    % read image
     I = single(vl_imdown(rgb2gray(I)));    % convert to gray scale
     Is = vl_imsmooth(I, sqrt((binSize/magnif)^2 - .25)) ;
-    [~,d] = vl_dsift(Is, 'size', binSize);    % compute SIFT features
+    [~,d] = vl_dsift(Is, 'size', binSize, 'step',stepSize);    % compute SIFT features
     c(imgList(i).name) = d;    % add descriptors to dictinary
 end
 toc
@@ -32,7 +33,7 @@ toc
 K = values(c);
 
 % pass this through the sparse Filtering code to learn dictionary bases
-data = [K{1:size(K,2)}];    % 128 X patches
+data = double([K{1:size(K,2)}]);    % 128 X patches
 
 %% Remove DC
 data = bsxfun(@minus, data, mean(data));
@@ -50,11 +51,11 @@ data1 = feedForwardSF(L1, data);
 data1 = bsxfun(@minus, data1, mean(data1));
 
 %% Train Layer 2
-L2_size = 128;
-L2 = sparseFiltering(L2_size, data1);
+%L2_size = 128;
+%L2 = sparseFiltering(L2_size, data1);
 
 %% Visualize Layer 2
-figure;
+%figure;
 
 % Number of L2 units to visualize
 num_viz = 10; 

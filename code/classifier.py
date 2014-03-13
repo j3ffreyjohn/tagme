@@ -6,9 +6,11 @@ from sklearn import svm
 ###############
 # SET THESE   #
 ###############
-trainFile = '../data/Train/feature_vectors.txt'
+#trainFile = '../data/Train/feature_vectors.txt'
+trainFile = '../data/Train/fVectors.txt'
 trainLabelsFile = '../data/Train/labels.txt'
-validationFile = '../data/Validation/feature_vectors.txt'
+#validationFile = '../data/Validation/feature_vectors.txt'
+validationFile = '../data/Validation/fVectors.txt'
 validationLabelsFile = '../data/Validation/trueLabels.txt'
 predictionsFile_RF = '../data/RF/labels.txt'
 predictionsFile_SVM = '../data/SVM/labels.txt'
