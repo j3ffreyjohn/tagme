@@ -1,10 +1,11 @@
 function [ ] = writeFiles( data,trainFolder,validFolder )
 %writeFiles write out the training and test file
 
-num_des = 324;
+num_des = 576;
 
 trainFile = fopen('../data/Train/fVectors.txt','wt');
 validFile = fopen('../data/Validation/fVectors.txt','wt');
+%validFile = fopen('../data/Test/fVectors.txt','wt');
 
 trainList = dir(trainFolder);
 validList = dir(validFolder);

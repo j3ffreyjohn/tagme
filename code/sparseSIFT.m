@@ -9,7 +9,8 @@ function [ ] = sparseSIFT()
 
 %%%%SET THESE%%%%%%%%%%
 trainFolder = '../data/Train/Images/';
-validFolder = '../data/Validation/Images';
+%validFolder = '../data/Test/Images/';
+validFolder = '../data/Validation/Images/';
 
 %%%%Compute SIFT%%%%%%%
 cTrain = SIFT(trainFolder);     % SIFT Dictionary
@@ -32,8 +33,19 @@ L1 = sparseFiltering(L1_size, dataT);   % If time permits, let the optimizer run
 %% Feed-forward Layer 1
 data1 = feedForwardSF(L1, data);
 
+%% Remove DC
+dataT2 = bsxfun(@minus, data1, mean(data1));
+
+%% Train Layer 2
+L2_size = 64;
+L2 = sparseFiltering( L2_size,dataT2);
+
+%% Feed-forward Layer 2
+data2 = feedForwardSF(L2, data);
+
+
 % Write out training and test files
-writeFiles(data1,trainFolder,validFolder);
+writeFiles(data2,trainFolder,validFolder);
 
 end
 

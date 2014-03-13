@@ -4,7 +4,7 @@ function [ c ] = SIFT(folder)
 imgList = dir(folder);
 
 % Sift Parameters
-binSize = 16;
+binSize = 8;
 magnif = 3;
 stepSize = 4;
 
