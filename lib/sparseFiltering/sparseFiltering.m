@@ -3,7 +3,7 @@ function [optW] = sparseFiltering(N, X)
     % N = # features, X = input data (examples in column)
     optW = randn(N, size(X, 1));
     optW = minFunc(@SparseFilteringObj, optW(:), ...
-                   struct('MaxIter', 200, 'Corr', 20), X, N);
+                   struct('MaxIter', 450, 'Corr', 15), X, N);
     optW = reshape(optW, [N, size(X, 1)]);
     
 end

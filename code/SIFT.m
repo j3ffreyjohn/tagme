@@ -4,9 +4,9 @@ function [ c ] = SIFT(folder)
 imgList = dir(folder);
 
 % Sift Parameters
-binSize = 20;
+binSize = 16;
 magnif = 3;
-stepSize = 2;
+stepSize = 4;
 
 c = containers.Map;
 

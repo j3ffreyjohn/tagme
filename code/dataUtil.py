@@ -4,6 +4,10 @@ import pandas as pd
 import numpy as np
 from collections import defaultdict
 
+# Define the separator
+sep=' '
+
+
 # Compute classification accuracy of predictions
 def getAcc(predictionsFile,truthFile):
 	p = open(predictionsFile,'r')
@@ -48,7 +52,7 @@ def getData(trainFile,trainLabelsFile,validationFile,validationLabelsFile):
 
 	dataD = defaultdict()
 	for el in trainData:
-		vals = el.split(' ')
+		vals = el.split(sep)
 		dataD[vals[0]] = [vals[0],vals[1:-1],1]
 	for el in trainLabels:
 		vals = el.split(' ')
@@ -56,7 +60,7 @@ def getData(trainFile,trainLabelsFile,validationFile,validationLabelsFile):
 		current.append(vals[1][0])
 		dataD[vals[0]] = current
 	for el in validationData:
-		vals = el.split(' ')
+		vals = el.split(sep)
 		dataD[vals[0]] = [vals[0],vals[1:-1],0]
 	for el in validationLabels:
 		vals = el.split(' ')

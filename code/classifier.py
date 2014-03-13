@@ -27,6 +27,7 @@ testData = [el for el in data if el[2]==0]
 train, test = df[df['is_train']==1], df[df['is_train']==0]
 testFiles = list(test['fileName'])
 
+print 'Fitting RF model . . .'
 # Fit RF Model and obtain predictions
 features = df.columns[:-3]
 clf = RandomForestClassifier(n_estimators=100,n_jobs=2)
@@ -45,6 +46,7 @@ predOut.close()
 accuracy = DU.getAcc(predictionsFile_RF,validationLabelsFile)
 print 'Classification Accuracy (Random Forest) : ', accuracy
 
+print 'Training SVM . . .'
 # Train multi-class SVM on the training data
 X_train = []
 Y_train= []
@@ -54,7 +56,7 @@ for el in trainData:
 	Y_train.append(int(el[3]))
 for el in testData:
 	X_test.append([float(fval) for fval in el[1]])
-clf = svm.SVC()
+clf = svm.SVC(kernel='linear')
 clf.fit(X_train,Y_train)
 preds = clf.predict(X_test)
 
