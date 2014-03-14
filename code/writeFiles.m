@@ -1,11 +1,11 @@
-function [ ] = writeFiles( data,trainFolder,validFolder )
+function [ ] = writeFiles( data,siftSize,poolSize,trainFolder,validFolder )
 %writeFiles write out the training and test file
 
-num_des = 576;
+num_des = siftSize/poolSize;
 
 trainFile = fopen('../data/Train/fVectors.txt','wt');
-validFile = fopen('../data/Validation/fVectors.txt','wt');
-%validFile = fopen('../data/Test/fVectors.txt','wt');
+%validFile = fopen('../data/Validation/fVectors.txt','wt');
+validFile = fopen('../data/Test/fVectors.txt','wt');
 
 trainList = dir(trainFolder);
 validList = dir(validFolder);

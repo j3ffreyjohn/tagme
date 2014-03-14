@@ -52,9 +52,13 @@ X_train = []
 Y_train= []
 X_test = []
 for el in trainData:
-	X_train.append([float(fval) for fval in el[1]])
+	fVals = el[1]
+	#fVals.remove(fVals[fVals.index('')])
+	X_train.append([float(fval) for fval in fVals])
 	Y_train.append(int(el[3]))
 for el in testData:
+	fVals = el[1]
+	#fVals.remove(fVals[fVals.index('')])
 	X_test.append([float(fval) for fval in el[1]])
 clf = svm.SVC(kernel='linear')
 clf.fit(X_train,Y_train)

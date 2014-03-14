@@ -9,8 +9,10 @@ function [ ] = sparseSIFT()
 
 %%%%SET THESE%%%%%%%%%%
 trainFolder = '../data/Train/Images/';
-%validFolder = '../data/Test/Images/';
-validFolder = '../data/Validation/Images/';
+validFolder = '../data/Test/Images/';
+%validFolder = '../data/Validation/Images/';
+poolSize = 8;
+siftSize = 576;
 
 %%%%Compute SIFT%%%%%%%
 cTrain = SIFT(trainFolder);     % SIFT Dictionary
@@ -27,25 +29,28 @@ data = bsxfun(@minus, d_all, mean(d_all));
 dataT = bsxfun(@minus, d_train, mean(d_train));
 
 %% Train Layer 1
-L1_size = 128;  % Learn a complete representation
+L1_size = 256;  % Learn overcomplete representation
 L1 = sparseFiltering(L1_size, dataT);   % If time permits, let the optimizer run for more iterations. 
 
 %% Feed-forward Layer 1
 data1 = feedForwardSF(L1, data);
 
 %% Remove DC
-dataT2 = bsxfun(@minus, data1, mean(data1));
+%dataT2 = bsxfun(@minus, data1, mean(data1));
 
 %% Train Layer 2
-L2_size = 64;
-L2 = sparseFiltering( L2_size,dataT2);
+%L2_size = 64;
+%L2 = sparseFiltering( L2_size,dataT2);
 
 %% Feed-forward Layer 2
-data2 = feedForwardSF(L2, data);
+%data2 = feedForwardSF(L2, data);
 
+
+%% Naive max-pooling of features within a neighborhood
+dataP = maxPool(data1,poolSize,siftSize);
 
 % Write out training and test files
-writeFiles(data2,trainFolder,validFolder);
+writeFiles(dataP,siftSize,poolSize,trainFolder,validFolder);
 
 end
 
