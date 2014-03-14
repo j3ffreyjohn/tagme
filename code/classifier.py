@@ -6,12 +6,12 @@ from sklearn import svm
 ###############
 # SET THESE   #
 ###############
-trainFile = '../data/Train/fVectors.txt'
+trainFile = '../data/Train/fVectorsC.txt'
 trainLabelsFile = '../data/Train/labels.txt'
-validationFile = '../data/Validation/fVectors.txt'
-validationLabelsFile = '../data/Validation/trueLabels.txt'
-#validationFile = '../data/Test/fVectors.txt'
-#validationLabelsFile = '../data/Test/trueLabels.txt'
+#validationFile = '../data/Validation/fVectors.txt'
+#validationLabelsFile = '../data/Validation/trueLabels.txt'
+validationFile = '../data/Test/fVectorsC.txt'
+validationLabelsFile = '../data/Test/trueLabels.txt'
 predictionsFile_RF = '../data/RF/labels.txt'
 predictionsFile_SVM = '../data/SVM/labels.txt'
 
@@ -53,12 +53,12 @@ Y_train= []
 X_test = []
 for el in trainData:
 	fVals = el[1]
-	#fVals.remove(fVals[fVals.index('')])
+	fVals.remove(fVals[fVals.index('')])
 	X_train.append([float(fval) for fval in fVals])
 	Y_train.append(int(el[3]))
 for el in testData:
 	fVals = el[1]
-	#fVals.remove(fVals[fVals.index('')])
+	fVals.remove(fVals[fVals.index('')])
 	X_test.append([float(fval) for fval in el[1]])
 clf = svm.SVC(kernel='linear')
 clf.fit(X_train,Y_train)

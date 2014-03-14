@@ -9,31 +9,37 @@ function [ ] = sparseSIFT()
 
 %%%%SET THESE%%%%%%%%%%
 trainFolder = '../data/Train/Images/';
-validFolder = '../data/Test/Images/';
-%validFolder = '../data/Validation/Images/';
+testFolder = '../data/Test/Images/';
+validFolder = '../data/Validation/Images/';
 poolSize = 8;
 siftSize = 576;
 
 %%%%Compute SIFT%%%%%%%
 cTrain = SIFT(trainFolder);     % SIFT Dictionary
 cValid = SIFT(validFolder);
+cTest = SIFT(testFolder);
 
-K_all = [values(cTrain) values(cValid)];
-d_all = double([K_all{1:size(K_all,2)}]);
+%K_t_v = [values(cTrain) values(cValid)];
+%d_t_v = double([K_t_v{1:size(K_t_v,2)}]);
+
+K_t_t = [values(cTrain) values(cTest)];
+d_t_t = double([K_t_t{1:size(K_t_t,2)}]);
 
 K_train = [values(cTrain)];
 d_train = double([K_train{1:size(K_train,2)}]);
 
 %% Remove DC
-data = bsxfun(@minus, d_all, mean(d_all));
+data = bsxfun(@minus, d_t_v, mean(d_t_v));
+data_all = bsxfun(@minus, d_t_t, mean(d_t_t));
 dataT = bsxfun(@minus, d_train, mean(d_train));
 
 %% Train Layer 1
-L1_size = 256;  % Learn overcomplete representation
+L1_size = 128;  % Learn overcomplete representation
 L1 = sparseFiltering(L1_size, dataT);   % If time permits, let the optimizer run for more iterations. 
 
 %% Feed-forward Layer 1
 data1 = feedForwardSF(L1, data);
+data11 = feedForwardSF(L1,data_all);
 
 %% Remove DC
 %dataT2 = bsxfun(@minus, data1, mean(data1));
@@ -48,6 +54,7 @@ data1 = feedForwardSF(L1, data);
 
 %% Naive max-pooling of features within a neighborhood
 dataP = maxPool(data1,poolSize,siftSize);
+dataP_all = maxPool(data11,poolSize,siftSize);
 
 % Write out training and test files
 writeFiles(dataP,siftSize,poolSize,trainFolder,validFolder);
